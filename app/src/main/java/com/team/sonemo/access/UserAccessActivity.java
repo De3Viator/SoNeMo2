@@ -41,9 +41,5 @@ public class UserAccessActivity extends AppCompatActivity {
                 }
             });
         });
-
-
-
-
     }
 }
