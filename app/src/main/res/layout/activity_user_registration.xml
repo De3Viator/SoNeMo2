@@ -1,0 +1,238 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:visibility="visible"
+    tools:context=".access.UserRegistrationActivity">
+    <!-- Фон с трансформером -->
+
+    <ImageView
+        android:id="@+id/bgMstitelReg"
+        android:layout_width="414dp"
+        android:layout_height="736dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.333"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.6"
+        app:srcCompat="@drawable/bg_img_reg" />
+
+    <!-- Тонирование синим оттенком -->
+    <ImageView
+        android:id="@+id/bgSetToningReg"
+        android:layout_width="414dp"
+        android:layout_height="736dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.333"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.6"
+        app:srcCompat="@drawable/bg_rh_reg" />
+
+    <!-- Градиент из прозрачного до синего цвета сверху-вниз -->
+    <ImageView
+        android:id="@+id/bgGradientReg"
+        android:layout_width="414dp"
+        android:layout_height="736dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.666"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.4"
+        app:srcCompat="@drawable/bg_linear_reg" />
+
+    <!-- Поле ввода возраста -->
+    <EditText
+        android:id="@+id/edtAgeReg"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:background="@null"
+        android:backgroundTint="#DCC8C8"
+        android:drawableLeft="@drawable/ic_icon_age"
+        android:drawableBottom="@drawable/ic_line_white"
+        android:drawablePadding="5dp"
+        android:ems="10"
+        android:foregroundTint="#C1C1C1"
+        android:hint="age"
+        android:inputType="text"
+        android:paddingLeft="5dp"
+        android:paddingTop="5dp"
+        android:paddingEnd="5dp"
+        android:paddingRight="5dp"
+        android:paddingBottom="5dp"
+        android:textColor="#FEFEFE"
+        android:textColorHint="#FEFEFE"
+        android:visibility="visible"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/edtPasswordConfrimReg" />
+
+    <!-- Поле ввода страны -->
+    <EditText
+        android:id="@+id/edtCountryReg"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:background="@null"
+        android:backgroundTint="#DCC8C8"
+        android:drawableLeft="@drawable/ic_icon_country"
+        android:drawableBottom="@drawable/ic_line_white"
+        android:drawablePadding="5dp"
+        android:ems="10"
+        android:foregroundTint="#C1C1C1"
+        android:hint="country"
+        android:inputType="text"
+        android:paddingLeft="5dp"
+        android:paddingTop="5dp"
+        android:paddingEnd="5dp"
+        android:paddingRight="5dp"
+        android:paddingBottom="5dp"
+        android:textColor="#FEFEFE"
+        android:textColorHint="#FEFEFE"
+        android:visibility="visible"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/edtAgeReg" />
+
+    <!-- Поле ввода почты -->
+    <EditText
+        android:id="@+id/edtEmailReg"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:background="@null"
+        android:backgroundTint="#DCC8C8"
+        android:drawableLeft="@drawable/ic_icon_email"
+        android:drawableBottom="@drawable/ic_line_white"
+        android:drawablePadding="5dp"
+        android:ems="10"
+        android:foregroundTint="#C1C1C1"
+        android:hint="email"
+        android:inputType="text"
+        android:paddingLeft="5dp"
+        android:paddingTop="5dp"
+        android:paddingEnd="5dp"
+        android:paddingRight="5dp"
+        android:paddingBottom="5dp"
+        android:textColor="#FEFEFE"
+        android:textColorHint="#FEFEFE"
+        android:visibility="visible"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/edtUserNameReg" />
+
+    <!-- логотип вверху -->
+    <ImageView
+        android:id="@+id/imgLogoReg"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="120dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/sonemo" />
+
+    <!-- Поле ввода никнейма -->
+    <EditText
+        android:id="@+id/edtUserNameReg"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="64dp"
+        android:autoText="false"
+        android:background="@null"
+        android:drawableLeft="@drawable/ic_icon_human"
+        android:drawableBottom="@drawable/ic_line_white"
+        android:drawablePadding="5dp"
+        android:ems="10"
+        android:hint="username"
+        android:inputType="textPersonName"
+        android:paddingLeft="5dp"
+        android:paddingTop="5dp"
+        android:paddingEnd="5dp"
+        android:paddingRight="5dp"
+        android:paddingBottom="5dp"
+        android:textColor="#FEFEFE"
+        android:textColorHint="#FEFEFE"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imgLogoReg" />
+
+    <!-- Поле ввода пароля -->
+    <EditText
+        android:id="@+id/edtPasswordReg"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:background="@null"
+        android:backgroundTint="#DCC8C8"
+        android:drawableLeft="@drawable/ic_icon_zamok"
+        android:drawableBottom="@drawable/ic_line_white"
+        android:drawablePadding="5dp"
+        android:ems="10"
+        android:foregroundTint="#C1C1C1"
+        android:hint="password"
+        android:inputType="textPassword"
+        android:paddingLeft="5dp"
+        android:paddingTop="5dp"
+        android:paddingEnd="5dp"
+        android:paddingRight="5dp"
+        android:paddingBottom="5dp"
+        android:textColor="#FEFEFE"
+        android:textColorHint="#FEFEFE"
+        android:visibility="visible"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/edtEmailReg" />
+
+    <!-- Поле ввода подтверждения пароля -->
+    <EditText
+        android:id="@+id/edtPasswordConfrimReg"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:background="@null"
+        android:backgroundTint="#DCC8C8"
+        android:drawableLeft="@drawable/ic_icon_zamok"
+        android:drawableBottom="@drawable/ic_line_white"
+        android:drawablePadding="5dp"
+        android:ems="10"
+        android:foregroundTint="#C1C1C1"
+        android:hint="confirm the password"
+        android:inputType="textPassword"
+        android:paddingLeft="5dp"
+        android:paddingTop="5dp"
+        android:paddingEnd="5dp"
+        android:paddingRight="5dp"
+        android:paddingBottom="5dp"
+        android:textColor="#FEFEFE"
+        android:textColorHint="#FEFEFE"
+        android:visibility="visible"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/edtPasswordReg" />
+
+    <!-- кнопка создать аккаунт -->
+    <ImageButton
+        android:id="@+id/imgbtnCreateAcc"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="48dp"
+        android:background="@null"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/edtCountryReg"
+        app:srcCompat="@drawable/btn_create_acc" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
