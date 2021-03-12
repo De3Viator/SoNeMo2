@@ -6,7 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.widget.ImageButton;
 
-public class MainActivity extends AppCompatActivity {
+public class HomeActivity extends AppCompatActivity {
     private ImageButton btnHome;
     private ImageButton btnCinemas;
     private ImageButton btnMessages;
@@ -15,14 +15,13 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);//
-        btnHome = findViewById(R.id.btnHome);
+        setContentView(R.layout.activity_home);
+        btnProfile = findViewById(R.id.btnProfile);
         btnCinemas = findViewById(R.id.btnCinemas);
         btnMessages = findViewById(R.id.btnMessages);
 
-
-        btnHome.setOnClickListener(v -> {
-            Intent intent = new Intent(this, HomeActivity.class);
+        btnProfile.setOnClickListener(v ->{
+            Intent intent = new Intent(this, MainActivity.class);
             startActivity(intent);
         });
 
@@ -35,6 +34,5 @@ public class MainActivity extends AppCompatActivity {
             Intent intent = new Intent(this, CinemasActivity.class);
             startActivity(intent);
         });
-
     }
 }

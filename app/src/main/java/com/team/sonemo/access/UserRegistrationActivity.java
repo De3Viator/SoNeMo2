@@ -15,6 +15,7 @@ import android.widget.Toast;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.team.sonemo.MainActivity;
@@ -84,9 +85,10 @@ public class UserRegistrationActivity extends AppCompatActivity {
                 if (task.isSuccessful()){
                     Toast.makeText(UserRegistrationActivity.this, "Account created",Toast.LENGTH_SHORT);
                     userID = mAuth.getCurrentUser().getUid();
-                    DocumentReference documentReference = db.collection("users").document(userID);
+                    DocumentReference documentReference = db.collection("Users").document(userID);
                     Map<String,Object> user = new HashMap<>();
                     //Данные пользователя в профиль
+                    user.put("id",userID);
                     user.put("username",username);
                     user.put("email",email);
                     user.put("password",password);
