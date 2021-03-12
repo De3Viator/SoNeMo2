@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.Window;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -17,17 +18,20 @@ public class UserAccessActivity extends AppCompatActivity {
     private EditText etEmail,etPassword;
     private FirebaseAuth mAuth;
     private ImageButton imgbtnSignIn;
+    private TextView goToReg;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_access);
-        etEmail = findViewById(R.id.etEmail);
-        etPassword = findViewById(R.id.etPassword);
-        imgbtnSignIn = findViewById(R.id.imgbtnSignIn);//
-
+        etEmail = findViewById(R.id.etEmail);// Получение поля ввода почты
+        etPassword = findViewById(R.id.etPassword);// Получение поля ввода пароля
+        imgbtnSignIn = findViewById(R.id.imgbtnSignIn);// Получение кнопки входа
+        goToReg = findViewById(R.id.txtCreateAcc);// Получение кнопки перехода на экран регистрации
         mAuth = FirebaseAuth.getInstance();
+
+
 
         imgbtnSignIn.setOnClickListener(v -> {
             String email = etEmail.getText().toString().trim();
@@ -40,6 +44,11 @@ public class UserAccessActivity extends AppCompatActivity {
                     Toast.makeText(UserAccessActivity.this,"Error "+task.getException().getMessage(),Toast.LENGTH_SHORT);
                 }
             });
-        });
+        });// вход в аккаунт
+
+        goToReg.setOnClickListener(v ->{
+            Intent intent = new Intent(this, UserRegistrationActivity.class);
+            startActivity(intent);
+        });// Переход на экран регистрации
     }
 }

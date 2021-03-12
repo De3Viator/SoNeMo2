@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.Window;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnFailureListener;
@@ -25,6 +26,7 @@ import java.util.Map;
 public class UserRegistrationActivity extends AppCompatActivity {
     private EditText edtEmailReg,edtUserNameReg, edtPasswordReg, edtPasswordConfirmReg, edtAgeReg, edtCountryReg;
     private ImageButton imgbtnCreateAcc;
+    private TextView GoToSignIn;
     private FirebaseAuth mAuth;
     private FirebaseFirestore db;
     private String userID;
@@ -43,6 +45,7 @@ public class UserRegistrationActivity extends AppCompatActivity {
         edtPasswordReg = findViewById(R.id.edtPasswordReg);
         edtPasswordConfirmReg = findViewById(R.id.edtPasswordConfrimReg);
         imgbtnCreateAcc = findViewById(R.id.imgbtnCreateAcc);
+        GoToSignIn = findViewById(R.id.txtGoToSignIn);
 
         mAuth = FirebaseAuth.getInstance();
         db = FirebaseFirestore.getInstance();
@@ -104,6 +107,11 @@ public class UserRegistrationActivity extends AppCompatActivity {
                 }
 
             });
+        });
+
+        GoToSignIn.setOnClickListener(v ->{
+            Intent intent = new Intent(this, UserAccessActivity.class);
+            startActivity(intent);
         });
     }
 }
