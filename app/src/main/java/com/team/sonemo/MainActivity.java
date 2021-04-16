@@ -22,17 +22,17 @@ public class MainActivity extends AppCompatActivity {
 
 
         btnHome.setOnClickListener(v -> {
-            Intent intent = new Intent(this, HomeActivity.class);
+            Intent intent = new Intent(MainActivity.this, HomeActivity.class);
             startActivity(intent);
         });
 
         btnMessages.setOnClickListener(v -> {
-            Intent intent = new Intent(this, MessagesActivity.class);
+            Intent intent = new Intent(MainActivity.this, MessagesActivity.class);
             startActivity(intent);
         });
 
         btnCinemas.setOnClickListener(v -> {
-            Intent intent = new Intent(this, CinemasActivity.class);
+            Intent intent = new Intent(MainActivity.this, CinemasActivity.class);
             startActivity(intent);
         });
 

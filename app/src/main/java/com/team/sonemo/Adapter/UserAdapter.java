@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -13,20 +12,26 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
-import com.google.firebase.firestore.auth.User;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.team.sonemo.Messager;
 import com.team.sonemo.R;
+import com.team.sonemo.Model.Users;
 //import net.lebdeveloper.firebaseapp.Model.Users;
 
 import java.util.List;
 
 public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
-
+    //FirebaseAuth mAuth;
     private Context context;
-    private List<User> mUsers;
+    private List<Users> mUsers;
+    private boolean isChat;
 
-    public UserAdapter(Context context, List<User> mUsers) {
+    //Constructor
+    public UserAdapter(Context context, List<Users> mUsers, boolean isChat) {
         this.context = context;
         this.mUsers = mUsers;
+        this.isChat = isChat;
     }
 
 
@@ -38,29 +43,44 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
                 false);
 
 
-        return new UserAdapter.ViewHolder(view);
+        return new  UserAdapter.ViewHolder(view);
     }
+
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
 
-        User user = mUsers.get(position);
-        holder.username.setText(user.getUsername());
+        final Users users = mUsers.get(position);
+        holder.username.setText(users.getUsername());
 
-        if (user.getImageURL().equels("default")){
+        if (users.getImageURL() != null && users.getImageURL().equals("default")){
             holder.imageView.setImageResource(R.mipmap.ic_launcher);
         }else {
             Glide.with(context)
-                    .load(user.getImageURL())
+                    .load(users.getImageURL())
                     .into(holder.imageView);
+        }
+
+        //Status Check
+        if (isChat){
+            if (users.getStatus() != null && users.getStatus().equals("online")) {
+                holder.imageViewOn.setVisibility(View.VISIBLE);
+                holder.imageViewOff.setVisibility(View.GONE);
+            }else {
+                holder.imageViewOn.setVisibility(View.GONE);
+                holder.imageViewOff.setVisibility(View.VISIBLE);
+            }
+        }else {
+            holder.imageViewOn.setVisibility(View.GONE);
+            holder.imageViewOff.setVisibility(View.GONE);
         }
 
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(context, Massager.class);
-                i.putExtra("userID", user.getId());
+                Intent i = new Intent(context, Messager.class);
+                i.putExtra("id", users.getId());
                 context.startActivity(i);
             }
         });
@@ -77,26 +97,18 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
     public class ViewHolder extends RecyclerView.ViewHolder{
         public TextView username;
         public ImageView imageView;
+        public ImageView imageViewOn;
+        public ImageView imageViewOff;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
             username = itemView.findViewById(R.id.username);
             imageView = itemView.findViewById(R.id.imageView);
+            imageViewOn = itemView.findViewById(R.id.statusIMGoN);
+            imageViewOff = itemView.findViewById(R.id.statusIMGoFF);
+
         }
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 }
