@@ -36,6 +36,7 @@ import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
 import java.util.HashMap;
+import java.util.Objects;
 
 public class CreateGroup extends AppCompatActivity {
 
@@ -56,9 +57,9 @@ public class CreateGroup extends AppCompatActivity {
 
     private FirebaseAuth firebaseAuth;
 
-    private ImageView groupIcon;
-    private EditText group_title, groupDescription;
-    private FloatingActionButton createGroupBtn;
+    ImageView groupIcon;
+    EditText group_title, groupDescription;
+    FloatingActionButton createGroupBtn;
 
     private ProgressDialog progressDialog;
 
@@ -73,6 +74,7 @@ public class CreateGroup extends AppCompatActivity {
         createGroupBtn.findViewById(R.id.createGroupBtn);
 
         actionBar = getSupportActionBar();
+        //assert actionBar != null;
         actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setDisplayShowHomeEnabled(true);
         actionBar.setTitle("Create Group");
@@ -105,8 +107,8 @@ public class CreateGroup extends AppCompatActivity {
         progressDialog.setMessage("Creating Group");
 
         //input title, descriptions
-        String groupTitle = group_title.getText().toString();
-        String groupDescriptions = groupDescription.getText().toString();
+        final String groupTitle = group_title.getText().toString().trim();
+        final String groupDescriptions = groupDescription.getText().toString().trim();
         //validation
         if (TextUtils.isEmpty(groupTitle)){
             Toast.makeText(this, "Please enter group title...", Toast.LENGTH_SHORT).show();
@@ -115,13 +117,18 @@ public class CreateGroup extends AppCompatActivity {
 
         progressDialog.show();
 
-        String group_timestamp = ""+System.currentTimeMillis();
+        final String group_timestamp = ""+System.currentTimeMillis();
         if (image_uri == null){
             //group without icon
-            createGroup(""+group_timestamp,""+groupTitle,""+groupDescriptions,"");
+            createGroup(
+                    ""+group_timestamp,
+                    ""+groupTitle,
+                    ""+groupDescriptions,
+                    ""
+            );
         }else{
             //group with icon
-            String fileNameAndPath = "Group_Images/"+"image"+group_timestamp;
+            String fileNameAndPath = "Group_Imgs/"+"image"+group_timestamp;
 
             StorageReference storageReference = FirebaseStorage.getInstance().getReference(fileNameAndPath);
             storageReference.putFile(image_uri)
@@ -132,12 +139,18 @@ public class CreateGroup extends AppCompatActivity {
                             while (!p_uriTask.isSuccessful());
                             Uri p_downloadUri = p_uriTask.getResult();
                             if (p_uriTask.isSuccessful()){
-                                createGroup(""+group_timestamp,""+groupTitle,""+groupDescriptions,"");
+                                createGroup(
+                                        ""+group_timestamp,
+                                        ""+groupTitle,
+                                        ""+groupDescriptions,
+                                        ""+p_downloadUri
+                                );
                             }
                         }
                     }).addOnFailureListener(new OnFailureListener() {
                 @Override
                 public void onFailure(@NonNull Exception e) {
+                    progressDialog.dismiss();
                     Toast.makeText(CreateGroup.this, ""+e.getMessage(), Toast.LENGTH_SHORT).show();
                 }
             });
@@ -146,7 +159,8 @@ public class CreateGroup extends AppCompatActivity {
 
     }
 
-    private void createGroup(String group_timestamp, String groupTitle, String groupDescriptions,String groupIcon) {
+    private void createGroup(final String group_timestamp, String groupTitle, String groupDescriptions,String groupIcon) {
+
         HashMap<String,String> hashMap = new HashMap<>();
         hashMap.put("groupID",""+group_timestamp);
         hashMap.put("groupDescription",""+groupDescriptions);
@@ -155,7 +169,7 @@ public class CreateGroup extends AppCompatActivity {
         hashMap.put("timestamp",""+group_timestamp);
         hashMap.put("createdBy",""+ firebaseAuth.getUid());
 
-        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Group");
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Groups");
         reference.child(group_timestamp).setValue(hashMap)
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
@@ -214,7 +228,7 @@ public class CreateGroup extends AppCompatActivity {
                             }
                         }else {
                             //gallery clicked
-                            if (!CheckStoragePermissions()){
+                            if (!checkStoragePermissions()){
                                 requestStoragePermissions();
                             }else{
                                 PickFromGallery();
@@ -232,7 +246,7 @@ public class CreateGroup extends AppCompatActivity {
 
     private void PickFromCamera(){
         ContentValues contentValues = new ContentValues();
-        contentValues.put(MediaStore.Images.Media.TITLE, "Group Image Title");
+        contentValues.put(MediaStore.Images.Media.TITLE, "Group Image Icon Title");
         contentValues.put(MediaStore.Images.Media.DESCRIPTION, "Group Image Icon Description");
         image_uri = getContentResolver().insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, contentValues);
 
@@ -241,12 +255,10 @@ public class CreateGroup extends AppCompatActivity {
         startActivityForResult(intent, IMAGE_PICK_CAMERA_CODE);
     }
 
-    private boolean CheckStoragePermissions(){
+    private boolean checkStoragePermissions(){
 
-        boolean result = ContextCompat.checkSelfPermission(this,
+        return ContextCompat.checkSelfPermission(this,
                 Manifest.permission.WRITE_EXTERNAL_STORAGE) == (PackageManager.PERMISSION_GRANTED);
-
-        return result;
     }
 
     private void requestStoragePermissions(){
@@ -287,7 +299,7 @@ public class CreateGroup extends AppCompatActivity {
             case CAMERA_REQUEST_CODE:{
                 if (grantResults.length > 0){
                     boolean cameraAccepted = grantResults[0] == PackageManager.PERMISSION_GRANTED;
-                    boolean storageAccepted = grantResults[0] == PackageManager.PERMISSION_GRANTED;
+                    boolean storageAccepted = grantResults[1] == PackageManager.PERMISSION_GRANTED;
                     if (cameraAccepted && storageAccepted){
                         //permission allowed
                         PickFromCamera();
@@ -300,7 +312,7 @@ public class CreateGroup extends AppCompatActivity {
             break;
             case STORAGE_REQUEST_CODE:{
                 if (grantResults.length > 0){
-                    boolean storageAccepted = grantResults[1] == PackageManager.PERMISSION_GRANTED;
+                    boolean storageAccepted = grantResults[0] == PackageManager.PERMISSION_GRANTED;
                     if (storageAccepted){
                         //permission allowed
                         PickFromGallery();

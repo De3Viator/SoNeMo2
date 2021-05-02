@@ -7,7 +7,7 @@
         android:title="@string/logout"
         app:showAsAction="never"/>
     <item
-        android:id="@+id/item_group"
+        android:id="@+id/item_create_group"
         android:title="@string/create_group"
         app:showAsAction="never"/>
 

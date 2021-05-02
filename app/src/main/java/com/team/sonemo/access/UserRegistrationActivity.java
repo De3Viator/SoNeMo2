@@ -89,7 +89,40 @@ public class UserRegistrationActivity extends AppCompatActivity {
                 return;
             }
 
-            Registration(username, password, age, country, email);
+            mAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(task -> {
+                if (task.isSuccessful()) {
+                    FirebaseUser firebaseUser = mAuth.getCurrentUser();
+                    assert firebaseUser != null;
+                    String userid = firebaseUser.getUid();
+
+                    reference = FirebaseDatabase.getInstance().getReference("MyUsers").child(userid);
+
+                    //HashMaps
+                    HashMap<String, Object> hashMap = new HashMap<>();
+                    hashMap.put("id", userid);
+                    hashMap.put("username", username);
+                    hashMap.put("age", age);
+                    hashMap.put("country", country);
+                    hashMap.put("imageURL", "default");
+                    hashMap.put("status", "offline");
+
+
+                    reference.setValue(hashMap).addOnCompleteListener(new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task) {
+
+                            if (task.isSuccessful()) {
+                                Intent i = new Intent(UserRegistrationActivity.this, MainActivity.class);
+                                i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+                                startActivity(i);
+                                finish();
+                            }
+                        }
+                    });
+                }else {
+                    Toast.makeText(UserRegistrationActivity.this, "Invalid Email or Password", Toast.LENGTH_SHORT).show();
+                }
+            });
                 });
 
 
@@ -163,42 +196,4 @@ public class UserRegistrationActivity extends AppCompatActivity {
           if (user.getImageUrl() != null && user.getImageURL().equals("default"))*/
     }
 
-    private void Registration(final String username, String email, String password, String age, String country) {
-        mAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(task -> {
-            if (task.isSuccessful()) {
-                FirebaseUser firebaseUser = mAuth.getCurrentUser();
-                assert firebaseUser != null;
-                String userid = firebaseUser.getUid();
-
-                reference = FirebaseDatabase.getInstance().getReference("MyUsers").child(userid);
-
-                //HashMaps
-                HashMap<String, Object> hashMap = new HashMap<>();
-                hashMap.put("id", userid);
-                hashMap.put("username", username);
-                hashMap.put("age", age);
-                hashMap.put("country", country);
-                hashMap.put("imageURL", "default");
-                hashMap.put("status", "offline");
-
-
-                reference.setValue(hashMap).addOnCompleteListener(new OnCompleteListener<Void>() {
-                    @Override
-                    public void onComplete(@NonNull Task<Void> task) {
-
-                        if (task.isSuccessful()) {
-                            Intent i = new Intent(UserRegistrationActivity.this, MainActivity.class);
-                            i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
-                            startActivity(i);
-                            finish();
-                        }
-                    }
-                });
-            }else {
-                Toast.makeText(UserRegistrationActivity.this, "Invalid Email or Password", Toast.LENGTH_SHORT).show();
-            }
-        });
-
-
-    }
 }

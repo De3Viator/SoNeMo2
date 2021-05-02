@@ -9,11 +9,12 @@
     tools:context=".CreateGroup">
 
     <ImageView
-        android:layout_width="100dp"
-        android:layout_height="100dp"
         android:id="@+id/groupIcon"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
         android:layout_centerHorizontal="true"
-        android:src="@mipmap/ic_group"/>
+        android:src="@drawable/ic_icon_man_foreground"
+         />
 
     <EditText
         android:id="@+id/group_title"
@@ -23,7 +24,7 @@
         android:layout_below="@+id/groupIcon"
         android:layout_marginTop="15dp"
         android:padding="10dp"
-        android:hint="Group Title"/>
+        android:hint="@string/group_title"/>
 
     <EditText
         android:id="@+id/groupDescription"
@@ -36,19 +37,15 @@
         android:layout_below="@+id/group_title"
         android:layout_marginTop="15dp"
         android:padding="10dp"
-        android:hint="Group Description"/>
-    
-    <ImageButton
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        />
+        android:hint="@string/group_description"/>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/createGroupBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
-        android:src="@mipmap/ic_group_white" />
+        android:src="@drawable/ic_group_gone_white_foreground"
+        android:contentDescription="@string/todo" />
 
 </RelativeLayout>

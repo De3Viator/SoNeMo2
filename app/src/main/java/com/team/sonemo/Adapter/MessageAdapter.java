@@ -1,5 +1,6 @@
 package com.team.sonemo.Adapter;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -23,9 +24,9 @@ import java.util.List;
 public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.ViewHolder> {
     FirebaseFirestore db;
     FirebaseAuth mAuth;
-    private Context context;
-    private List<Chat> mChat;
-    private String imgURL;
+    private final Context context;
+    private final List<Chat> mChat;
+    private final String imgURL;
 
     //Firebase
     FirebaseUser firebaseUser;
@@ -56,11 +57,12 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.ViewHold
                     parent,
                     false);
 
-            return new MessageAdapter.ViewHolder(view);
+            return new ViewHolder(view);
         }
     }
 
 
+    @SuppressLint("SetTextI18n")
     @Override
     public void onBindViewHolder(@NonNull MessageAdapter.ViewHolder holder, int position) {
 
@@ -92,7 +94,7 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.ViewHold
     }
 
 
-    public class ViewHolder extends RecyclerView.ViewHolder{
+    public static class ViewHolder extends RecyclerView.ViewHolder{
         public TextView show_message;
         public ImageView profile_image;
         public TextView txt_seen;

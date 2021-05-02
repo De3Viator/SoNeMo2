@@ -106,9 +106,9 @@ public class  MessagesActivity extends AppCompatActivity {
 
     //class ViewPagerAdapter
 
-     class ViewPagerAdapter extends FragmentPagerAdapter{
-        private  ArrayList<Fragment> fragments;
-        private ArrayList<String> titles;
+     static class ViewPagerAdapter extends FragmentPagerAdapter{
+        private final ArrayList<Fragment> fragments;
+        private final ArrayList<String> titles;
 
         ViewPagerAdapter(FragmentManager fm){
             super(fm);
@@ -174,18 +174,18 @@ public class  MessagesActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        switch (item.getItemId()){
-            case R.id.item_logout:
-                FirebaseAuth.getInstance().signOut();
-                startActivity(new Intent(MessagesActivity.this, UserAccessActivity.class));
-                finish();
+        if (item.getItemId() == R.id.item_logout) {
+            FirebaseAuth.getInstance().signOut();
+            startActivity(new Intent(MessagesActivity.this, UserAccessActivity.class));
+            finish();
 
-                return true;
+            return true;
         }
 
-        switch (item.getItemId()){
-            case R.id.item_group:
-                startActivity(new Intent(MessagesActivity.this, CreateGroup.class));
+        if (item.getItemId() == R.id.item_create_group) {
+            startActivity(new Intent(MessagesActivity.this, CreateGroup.class));
+
+            return true;
         }
         return false;
     }
