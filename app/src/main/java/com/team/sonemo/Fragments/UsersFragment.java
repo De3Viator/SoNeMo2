@@ -25,6 +25,8 @@ import com.team.sonemo.Model.Users;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.team.sonemo.R.id.recycleView;
+
 /**
  * A simple {@link Fragment} subclass.
  */
@@ -47,7 +49,7 @@ public class UsersFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_users, container, false);
 
-        recyclerView = view.findViewById(R.id.recycleView);
+        recyclerView = view.findViewById(recycleView);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
@@ -72,12 +74,16 @@ public class UsersFragment extends Fragment {
                     Users user = snapshot.getValue(Users.class);
 
                     assert user != null;
-                    if (user.getId() != null && !user.getId().equals(firebaseUser.getUid())){
-                        mUser.add(user);
+                    if (user.getId() != null) {
+                        assert firebaseUser != null;
+                        if (!user.getId().equals(firebaseUser.getUid())) {
+                            mUser.add(user);
+                        }
                     }
 
                     userAdapter = new UserAdapter(getContext(), mUser, false);
                     recyclerView.setAdapter(userAdapter);
+
                 }
 
             }

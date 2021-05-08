@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -62,7 +63,7 @@ public class Messager extends AppCompatActivity {
 
         //RecyclerView
 
-        recyclerView.findViewById(R.id.recycler_view);
+        recyclerView = findViewById(R.id.recycler_view);
         recyclerView.setHasFixedSize(true);
 
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getApplicationContext());
@@ -92,6 +93,7 @@ public class Messager extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 Users user = dataSnapshot.getValue(Users.class);
+                assert user != null;
                 username.setText(user.getUsername());
 
                 if (user.getImageURL() != null && user.getImageURL().equals("default")){
@@ -139,7 +141,8 @@ public class Messager extends AppCompatActivity {
 
                     Chat chat = snapshot.getValue(Chat.class);
 
-                    if (chat.getReceiver() != null && chat.getReceiver().equals(firebaseUser.getUid()) && chat.getSender().equals(userid)){
+                    assert chat != null;
+                    if ((chat.getReceiver() != null) && chat.getReceiver().equals(firebaseUser.getUid()) && chat.getSender().equals(userid)){
 
                         HashMap<String, Object> hashMap = new HashMap<>();
                         hashMap.put("isseen", true);

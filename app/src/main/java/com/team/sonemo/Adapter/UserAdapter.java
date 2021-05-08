@@ -12,8 +12,6 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.firestore.FirebaseFirestore;
 import com.team.sonemo.Messager;
 import com.team.sonemo.R;
 import com.team.sonemo.Model.Users;
@@ -51,7 +49,7 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
 
         final Users users = mUsers.get(position);
-        holder.username.setText(users.getUsername());
+        holder.getUsername().setText(users.getUsername());
 
         if (users.getImageURL() != null && users.getImageURL().equals("default")){
             holder.imageView.setImageResource(R.mipmap.ic_launcher);
@@ -95,7 +93,7 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
 
 
     public class ViewHolder extends RecyclerView.ViewHolder{
-        public TextView username;
+        private TextView username;
         public ImageView imageView;
         public ImageView imageViewOn;
         public ImageView imageViewOff;
@@ -103,11 +101,19 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
-            username = itemView.findViewById(R.id.username);
+            setUsername(itemView.findViewById(R.id.username));
             imageView = itemView.findViewById(R.id.imageView);
             imageViewOn = itemView.findViewById(R.id.statusIMGoN);
             imageViewOff = itemView.findViewById(R.id.statusIMGoFF);
 
+        }
+
+        public TextView getUsername() {
+            return username;
+        }
+
+        public void setUsername(TextView username) {
+            this.username = username;
         }
     }
 

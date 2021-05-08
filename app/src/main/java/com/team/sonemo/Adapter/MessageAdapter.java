@@ -22,8 +22,6 @@ import com.team.sonemo.R;
 import java.util.List;
 
 public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.ViewHolder> {
-    FirebaseFirestore db;
-    FirebaseAuth mAuth;
     private final Context context;
     private final List<Chat> mChat;
     private final String imgURL;
@@ -50,14 +48,14 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.ViewHold
                     false);
 
 
-            return new ViewHolder(view);
+            return new MessageAdapter.ViewHolder(view);
 
         } else {
             View view = LayoutInflater.from(context).inflate(R.layout.chat_item_left,
                     parent,
                     false);
 
-            return new ViewHolder(view);
+            return new MessageAdapter.ViewHolder(view);
         }
     }
 
