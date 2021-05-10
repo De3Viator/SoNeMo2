@@ -15,10 +15,12 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.team.sonemo.Model.UserModel;
 import com.team.sonemo.R;
+import com.team.sonemo.activity.home.ProfileActivity;
 import com.team.sonemo.data.FirebaseHelper;
 
 import java.io.FileNotFoundException;
@@ -28,6 +30,7 @@ import java.util.HashMap;
 public class RegActivity extends AppCompatActivity {
     private ImageButton btnRegReg;
     private EditText etRegCountry, etRegAge, etRegEmail, etRegPassword, etRegUsername, edtPasswordConfrimReg;
+    private TextView txtGoToSignIn;
 
     private Button btnAddImage;
     private ImageView ivRegAvatar;
@@ -46,6 +49,12 @@ public class RegActivity extends AppCompatActivity {
         etRegEmail = findViewById(R.id.edtEmailReg);
         btnAddImage = findViewById(R.id.btnAddImage);
         ivRegAvatar = findViewById(R.id.ivRegAvatar);
+        txtGoToSignIn = findViewById(R.id.txtGoToSignIn);
+
+        txtGoToSignIn.setOnClickListener(v ->{
+            Intent intent = new Intent(this, MainActivity.class);
+            startActivity(intent);
+        });
 
         btnAddImage.setOnClickListener(v -> {
             openGallery();

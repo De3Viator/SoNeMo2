@@ -104,7 +104,6 @@ public class Messager extends AppCompatActivity {
                     String image = "" + ds.child("image").getValue();
                     String age = "" + ds.child("age").getValue();
 
-
                     if (image != null) FirebaseHelper.getInstance()
                             .getReference(image)
                             .getDownloadUrl()

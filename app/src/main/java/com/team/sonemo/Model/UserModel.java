@@ -1,7 +1,7 @@
 package com.team.sonemo.Model;
 
 public class UserModel {
-    String username,email,password,uid,image,search,age,country;
+    String username,email,password,uid,image,search,age,country,status;
 
     public UserModel(String username, String email, String password, String age, String country) {
         this.username = username;
@@ -9,6 +9,15 @@ public class UserModel {
         this.password = password;
         this.age = age;
         this.country = country;
+        this.status = status;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 
     public String getUsername() {
