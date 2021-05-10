@@ -21,7 +21,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.team.sonemo.Adapter.CommentAdapter;
-import com.team.sonemo.DBHelper;
+import com.team.sonemo.data.DBHelper;
 import com.team.sonemo.Model.CommentModel;
 import com.team.sonemo.Model.PostModel;
 import com.team.sonemo.R;

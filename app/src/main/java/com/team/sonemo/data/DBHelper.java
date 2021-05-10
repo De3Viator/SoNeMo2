@@ -1,4 +1,4 @@
-package com.team.sonemo;
+package com.team.sonemo.data;
 
 
 import com.google.firebase.database.DatabaseReference;

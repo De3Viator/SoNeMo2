@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.team.sonemo.Messager;
+import com.team.sonemo.Model.UserModel;
 import com.team.sonemo.R;
 import com.team.sonemo.Model.Users;
 //import net.lebdeveloper.firebaseapp.Model.Users;
@@ -26,7 +27,7 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
     private boolean isChat;
 
     //Constructor
-    public UserAdapter(Context context, List<Users> mUsers, boolean isChat) {
+    public UserAdapter(Context context, List<UserModel> mUsers, boolean isChat) {
         this.context = context;
         this.mUsers = mUsers;
         this.isChat = isChat;

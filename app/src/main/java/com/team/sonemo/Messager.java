@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -21,16 +22,22 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
+import com.squareup.picasso.Picasso;
 import com.team.sonemo.Model.Chat;
 import com.team.sonemo.Adapter.MessageAdapter;
-import com.team.sonemo.Model.Users;
+import com.team.sonemo.Model.UserModel;
+import com.team.sonemo.data.FirebaseHelper;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
 public class Messager extends AppCompatActivity {
+
+    private FirebaseAuth mAuth;
+    private FirebaseUser user;
 
     TextView username;
     ImageView imageView;
@@ -61,6 +68,9 @@ public class Messager extends AppCompatActivity {
         btn_send = findViewById(R.id.btn_send);
         text_send = findViewById(R.id.text_send);
 
+        mAuth = FirebaseAuth.getInstance();
+        user = mAuth.getCurrentUser();
+
         //RecyclerView
 
         recyclerView = findViewById(R.id.recycler_view);
@@ -83,16 +93,45 @@ public class Messager extends AppCompatActivity {
             }
         });*/
 
-        intent = getIntent();
+
+        Query query = reference.orderByChild("email").equalTo(user.getEmail());
+        query.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for (DataSnapshot ds : snapshot.getChildren()) {
+                    String username = "" + ds.child("username").getValue();
+                    String country = "" + ds.child("country").getValue();
+                    String image = "" + ds.child("image").getValue();
+                    String age = "" + ds.child("age").getValue();
+
+
+                    if (image != null) FirebaseHelper.getInstance()
+                            .getReference(image)
+                            .getDownloadUrl()
+                            .addOnSuccessListener(uri ->
+                                    Picasso.get().load(uri).placeholder(R.drawable.ic_deafult_img).into(imageView))
+                            .addOnFailureListener(e -> Log.e("Firebase storage:",e.getLocalizedMessage()));
+
+                }
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+        /*intent = getIntent();
         userid = intent.getStringExtra("id");
 
         firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
-        reference = FirebaseDatabase.getInstance().getReference("MyUsers").child(userid);
+        reference = FirebaseDatabase.getInstance().getReference("Users").child(userid);
 
         reference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                Users user = dataSnapshot.getValue(Users.class);
+                UserModel user = dataSnapshot.getValue(UserModel.class);
                 assert user != null;
                 username.setText(user.getUsername());
 
@@ -111,7 +150,7 @@ public class Messager extends AppCompatActivity {
             public void onCancelled(@NonNull DatabaseError error) {
 
             }
-        });
+        });*/
 
         btn_send.setOnClickListener(v -> {
             String message = text_send.getText().toString();
@@ -238,7 +277,7 @@ public class Messager extends AppCompatActivity {
 
     private void CheckStatus(String status){
 
-        reference = FirebaseDatabase.getInstance().getReference("MyUsers").child(firebaseUser.getUid());
+        reference = FirebaseDatabase.getInstance().getReference("Users").child(firebaseUser.getUid());
 
         HashMap<String, Object> hashMap = new HashMap<>();
         hashMap.put("status", status);

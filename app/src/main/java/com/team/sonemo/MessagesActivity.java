@@ -25,9 +25,9 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.team.sonemo.Fragments.ChatsFragment;
 import com.team.sonemo.Fragments.UsersFragment;
-import com.team.sonemo.Model.Users;
-import com.team.sonemo.access.UserAccessActivity;
-import com.team.sonemo.access.UserRegistrationActivity;
+import com.team.sonemo.Model.UserModel;
+import com.team.sonemo.activity.home.ProfileActivity;
+
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -47,12 +47,12 @@ public class  MessagesActivity extends AppCompatActivity {
         setContentView(R.layout.activity_messages);
 
         firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
-        reference = FirebaseDatabase.getInstance().getReference("MyUsers").child(firebaseUser.getUid());
+        reference = FirebaseDatabase.getInstance().getReference("Users").child(firebaseUser.getUid());
 
         reference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                Users users = dataSnapshot.getValue(Users.class);
+                UserModel users = dataSnapshot.getValue(UserModel.class);
 
             }
 
@@ -83,7 +83,7 @@ public class  MessagesActivity extends AppCompatActivity {
         });
 
         btnProfile.setOnClickListener(v -> {
-            Intent intent = new Intent(this, MainActivity.class);
+            Intent intent = new Intent(this, ProfileActivity.class);
             startActivity(intent);
         });
 
@@ -143,7 +143,7 @@ public class  MessagesActivity extends AppCompatActivity {
 
     private void CheckStatus(String status){
 
-        reference = FirebaseDatabase.getInstance().getReference("MyUsers").child(firebaseUser.getUid());
+        reference = FirebaseDatabase.getInstance().getReference("Users").child(firebaseUser.getUid());
 
         HashMap<String, Object> hashMap = new HashMap<>();
         hashMap.put("status", status);
@@ -176,7 +176,7 @@ public class  MessagesActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         if (item.getItemId() == R.id.item_logout) {
             FirebaseAuth.getInstance().signOut();
-            startActivity(new Intent(MessagesActivity.this, UserAccessActivity.class));
+            startActivity(new Intent(MessagesActivity.this, com.team.sonemo.activity.access.MainActivity.class));
             finish();
 
             return true;

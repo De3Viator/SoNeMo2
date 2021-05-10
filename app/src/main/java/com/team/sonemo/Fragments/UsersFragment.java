@@ -19,6 +19,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.team.sonemo.Adapter.UserAdapter;
+import com.team.sonemo.Model.UserModel;
 import com.team.sonemo.R;
 import com.team.sonemo.Model.Users;
 
@@ -37,7 +38,7 @@ public class UsersFragment extends Fragment {
 
     private RecyclerView recyclerView;
     private UserAdapter userAdapter;
-    private List<Users> mUser;
+    private List<UserModel> mUser;
 
     public UsersFragment() {
         // Required empty public constructor
@@ -63,7 +64,7 @@ public class UsersFragment extends Fragment {
 
     private void ReadUsers(){
         final FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
-        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("MyUsers");
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Users");
 
         reference.addValueEventListener(new ValueEventListener() {
             @Override
@@ -71,12 +72,12 @@ public class UsersFragment extends Fragment {
                 mUser.clear();
 
                 for(DataSnapshot snapshot : dataSnapshot.getChildren()){
-                    Users user = snapshot.getValue(Users.class);
+                    UserModel user = snapshot.getValue(UserModel.class);
 
                     assert user != null;
-                    if (user.getId() != null) {
+                    if (user.getUid() != null) {
                         assert firebaseUser != null;
-                        if (!user.getId().equals(firebaseUser.getUid())) {
+                        if (!user.getUid().equals(firebaseUser.getUid())) {
                             mUser.add(user);
                         }
                     }

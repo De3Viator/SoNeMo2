@@ -6,6 +6,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.widget.ImageButton;
 
+import com.team.sonemo.activity.home.ProfileActivity;
+
 public class CinemasActivity extends AppCompatActivity {
     private ImageButton btnHome;
     private ImageButton btnCinemas;
@@ -31,7 +33,7 @@ public class CinemasActivity extends AppCompatActivity {
         });
 
         btnProfile.setOnClickListener(v -> {
-            Intent intent = new Intent(this, MainActivity.class);
+            Intent intent = new Intent(this, ProfileActivity.class);
             startActivity(intent);
         });
     }

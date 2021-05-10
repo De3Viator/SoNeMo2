@@ -9,6 +9,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -23,7 +24,10 @@ import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
 import com.team.sonemo.Adapter.PostAdapter;
-import com.team.sonemo.DBHelper;
+import com.team.sonemo.CinemasActivity;
+import com.team.sonemo.HomeActivity;
+import com.team.sonemo.MessagesActivity;
+import com.team.sonemo.data.DBHelper;
 import com.team.sonemo.Model.PostModel;
 import com.team.sonemo.R;
 import com.team.sonemo.activity.access.MainActivity;
@@ -43,6 +47,7 @@ public class ProfileActivity extends AppCompatActivity {
     private List<PostModel> postList;
     private PostAdapter postAdapter;
     private ImageView ivAvatar, ivCover;
+    private ImageButton btnCinemas, btnMessages, btnHome;
     private TextView txtUsername, txtCountry, txtAge;
     private Button btnUpdProfile, btnUsers, btnChatUserChat, btnAddPost;
     private DatabaseReference likeRef = DBHelper.getInstance().getChildReference("likeRef");
@@ -59,6 +64,9 @@ public class ProfileActivity extends AppCompatActivity {
         setContentView(R.layout.activity_profile);
         ivAvatar = findViewById(R.id.ivUserAvatar);
         txtUsername = findViewById(R.id.txtRVUserName);
+        btnCinemas = findViewById(R.id.btnCinemas);
+        btnMessages = findViewById(R.id.btnMessages);
+        btnHome = findViewById(R.id.btnHome);
         btnAddPost = findViewById(R.id.btnAddPost);
         rvPost = findViewById(R.id.rvPost);
         LinearLayoutManager layoutManager = new LinearLayoutManager(getBaseContext());
@@ -66,6 +74,21 @@ public class ProfileActivity extends AppCompatActivity {
         layoutManager.setReverseLayout(true);
 
         rvPost.setLayoutManager(layoutManager);
+
+        btnHome.setOnClickListener(v -> {
+            Intent intent = new Intent(this, HomeActivity.class);
+            startActivity(intent);
+        });
+
+        btnMessages.setOnClickListener(v -> {
+            Intent intent = new Intent(this, MessagesActivity.class);
+            startActivity(intent);
+        });
+
+        btnCinemas.setOnClickListener(v -> {
+            Intent intent = new Intent(this, CinemasActivity.class);
+            startActivity(intent);
+        });
 
         mAuth = FirebaseAuth.getInstance();
         user = mAuth.getCurrentUser();

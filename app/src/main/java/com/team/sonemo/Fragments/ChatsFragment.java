@@ -22,6 +22,7 @@ import com.google.firebase.firestore.auth.User;
 import com.team.sonemo.Adapter.UserAdapter;
 import com.team.sonemo.Model.Chat;
 import com.team.sonemo.Model.ChatList;
+import com.team.sonemo.Model.UserModel;
 import com.team.sonemo.Model.Users;
 import com.team.sonemo.R;
 
@@ -34,7 +35,7 @@ import java.util.List;
 public class ChatsFragment extends Fragment {
 
     private UserAdapter userAdapter;
-    private List<Users> mUsers;
+    private List<UserModel> mUsers;
 
     FirebaseUser firebaseUser;
     DatabaseReference reference;
@@ -107,11 +108,11 @@ public class ChatsFragment extends Fragment {
 
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()){
 
-                    Users user = snapshot.getValue(Users.class);
+                    UserModel user = snapshot.getValue(UserModel.class);
 
                     for (ChatList chatList : usersList){
 
-                        if(user.getId() != null && user.getId().equals(chatList.getId())){
+                        if(user.getUid() != null && user.getUid().equals(chatList.getId())){
                             mUsers.add(user);
                         }
 

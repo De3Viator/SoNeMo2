@@ -13,6 +13,7 @@ import android.provider.MediaStore;
 import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Toast;
 
@@ -25,8 +26,8 @@ import java.io.InputStream;
 import java.util.HashMap;
 
 public class RegActivity extends AppCompatActivity {
-    private Button btnRegReg;
-    private EditText etRegCountry, etRegAge, etRegEmail, etRegPassword, etRegUsername;
+    private ImageButton btnRegReg;
+    private EditText etRegCountry, etRegAge, etRegEmail, etRegPassword, etRegUsername, edtPasswordConfrimReg;
 
     private Button btnAddImage;
     private ImageView ivRegAvatar;
@@ -36,12 +37,13 @@ public class RegActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_reg);
-        btnRegReg = findViewById(R.id.btnRegReg);
-        etRegUsername = findViewById(R.id.etRegUsername);
-        etRegCountry = findViewById(R.id.etRegCountry);
-        etRegAge = findViewById(R.id.etRegAge);
-        etRegPassword = findViewById(R.id.etRegPassword);
-        etRegEmail = findViewById(R.id.etRegEmail);
+        btnRegReg = findViewById(R.id.imgbtnCreateAcc);
+        etRegUsername = findViewById(R.id.edtUserNameReg);
+        etRegCountry = findViewById(R.id.edtCountryReg);
+        etRegAge = findViewById(R.id.edtAgeReg);
+        edtPasswordConfrimReg = findViewById(R.id.edtPasswordConfrimReg);
+        etRegPassword = findViewById(R.id.edtPasswordReg);
+        etRegEmail = findViewById(R.id.edtEmailReg);
         btnAddImage = findViewById(R.id.btnAddImage);
         ivRegAvatar = findViewById(R.id.ivRegAvatar);
 
@@ -55,6 +57,7 @@ public class RegActivity extends AppCompatActivity {
             String age = etRegAge.getText().toString();
             String country = etRegCountry.getText().toString();
             String username = etRegUsername.getText().toString();
+            String confirmPassword = edtPasswordConfrimReg.getText().toString();
 
 
             if (email.isEmpty()) {
@@ -69,6 +72,11 @@ public class RegActivity extends AppCompatActivity {
 
             if (password.length() < 6) {
                 etRegPassword.setError("Short Password");
+                return;
+            }
+
+            if (!confirmPassword.contains(password)) {
+                edtPasswordConfrimReg.setError("Password is not valid");
                 return;
             }
 

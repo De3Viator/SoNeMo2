@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -31,7 +32,8 @@ import java.util.HashMap;
 public class MainActivity extends AppCompatActivity {
     private static final int RC_SIGN_IN = 100;
     GoogleSignInClient mGoogleSignInClient;
-    private Button btnLogin,btnRegister;
+    private ImageButton btnLogin;
+    private TextView btnRegister;
     private TextView txtRecover;
     private EditText etEmail,etPassword;
     private FirebaseAuth mAuth;
@@ -43,12 +45,12 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        btnRegister = findViewById(R.id.btnLogRegister);
-        btnLogin = findViewById(R.id.btnLogin);
-        etEmail = findViewById(R.id.etLogEmail);
-        etPassword = findViewById(R.id.etLogPassword);
+        btnRegister = findViewById(R.id.txtCreateAcc);
+        btnLogin = findViewById(R.id.imgbtnSignIn);
+        etEmail = findViewById(R.id.etEmail);
+        etPassword = findViewById(R.id.etPassword);
         txtRecover = findViewById(R.id.txtRecover);
-        btnGoogleSign = findViewById(R.id.btnGoogleSign);
+        btnGoogleSign = findViewById(R.id.btnSignGmail);
 
         // Configure Google Sign In
         GoogleSignInOptions gso = new GoogleSignInOptions
