@@ -4,28 +4,30 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".CinemasActivity">
+    tools:context=".access.CinemasActivity">
 
     <ImageView
         android:id="@+id/bg_robot2"
-        android:layout_width="414dp"
-        android:layout_height="736dp"
+        android:layout_width="519dp"
+        android:layout_height="822dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.817"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.425"
         app:srcCompat="@drawable/bg_img_reg" />
 
     <ImageView
         android:id="@+id/bg_linear2"
-        android:layout_width="414dp"
-        android:layout_height="736dp"
+        android:layout_width="0dp"
+        android:layout_height="820dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="0.827"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.6"
+        app:layout_constraintVertical_bias="0.425"
         app:srcCompat="@drawable/bg_linear" />
 
     <ImageView
@@ -37,9 +39,18 @@
         app:layout_constraintStart_toStartOf="parent"
         app:srcCompat="@drawable/rectangle_nav" />
 
-
-
-
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvRelis"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginStart="16dp"
+        android:layout_marginBottom="50dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/bg_robot2"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
 
     <LinearLayout
         android:layout_width="414dp"
@@ -80,7 +91,6 @@
             android:layout_weight="1"
             android:background="@null"
             app:srcCompat="@drawable/ic_profile" />
-
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
