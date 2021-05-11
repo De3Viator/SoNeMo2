@@ -1,17 +1,23 @@
 package com.team.sonemo;
 
+import androidx.appcompat.app.AppCompatActivity;
+
+import android.media.MediaRecorder;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.ImageView;
 import android.widget.MediaController;
 import android.widget.TextView;
 import android.widget.VideoView;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.squareup.picasso.Picasso;
-import com.team.sonemo.Model.RelisList;
+import com.team.sonemo.adapters.RecipeViewHolder;
+import com.team.sonemo.adapters.RelisListAdapter;
+
+import java.util.ArrayList;
 
 public class FilmActivity extends AppCompatActivity  {
     FirebaseFirestore db = FirebaseFirestore.getInstance();

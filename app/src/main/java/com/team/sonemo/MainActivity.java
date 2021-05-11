@@ -6,25 +6,23 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.widget.ImageButton;
 
-import com.team.sonemo.activity.home.ProfileActivity;
-
-public class HomeActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity {
     private ImageButton btnHome;
     private ImageButton btnCinemas;
     private ImageButton btnMessages;
     private ImageButton btnProfile;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_home);
-        btnProfile = findViewById(R.id.btnProfile);
+        setContentView(R.layout.activity_main);//
+        btnHome = findViewById(R.id.btnHome);
         btnCinemas = findViewById(R.id.btnCinemas);
         btnMessages = findViewById(R.id.btnMessages);
 
-        btnProfile.setOnClickListener(v ->{
-            Intent intent = new Intent(this, ProfileActivity.class);
+
+        btnHome.setOnClickListener(v -> {
+            Intent intent = new Intent(this, HomeActivity.class);
             startActivity(intent);
         });
 
@@ -37,5 +35,6 @@ public class HomeActivity extends AppCompatActivity {
             Intent intent = new Intent(this, CinemasActivity.class);
             startActivity(intent);
         });
+
     }
 }

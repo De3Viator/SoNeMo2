@@ -3,7 +3,6 @@
     package="com.team.sonemo">
 
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.CAMERA"/>
 
     <application
         android:allowBackup="true"
@@ -12,28 +11,19 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Sonemo">
-
-        <activity android:name=".activity.access.RegActivity"/>
+        <activity android:name=".FilmActivity"></activity>
+        <activity android:name=".MessagesActivity" />
         <activity android:name=".CinemasActivity" />
         <activity android:name=".HomeActivity" />
-        <activity android:name=".activity.home.ProfileActivity" />
-        <activity android:name=".CreateGroup"/>
-        <activity android:name=".activity.access.RecoverActivity"/>
-        <activity android:name=".activity.posts.AddPostActivity"/>
-        <activity android:name=".activity.posts.PostDetailActivity"/>
-        <activity android:name=".Messager" />
-        <activity android:name=".FilmActivity" />
-        <activity
-            android:name=".MessagesActivity"
-            android:theme="@style/Theme_Chat.Sonemo" />
-        <activity android:name= ".activity.access.MainActivity">
+        <activity android:name=".access.UserAccessActivity" />
+        <activity android:name=".access.UserRegistrationActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
+        <activity android:name=".MainActivity" />
     </application>
 
 </manifest>
