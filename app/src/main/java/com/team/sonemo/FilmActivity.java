@@ -20,8 +20,9 @@ import android.widget.VideoView;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.squareup.picasso.Picasso;
-import com.team.sonemo.adapters.RecipeViewHolder;
-import com.team.sonemo.adapters.RelisListAdapter;
+import com.team.sonemo.Model.RelisList;
+//import com.team.sonemo.adapters.RecipeViewHolder;
+//import com.team.sonemo.adapters.RelisListAdapter;
 
 import java.util.ArrayList;
 

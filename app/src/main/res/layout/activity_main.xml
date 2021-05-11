@@ -4,17 +4,17 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".activity.access.MainActivity">
 
     <ImageView
-        android:id="@+id/bg_mstitel"
-        android:layout_width="414dp"
-        android:layout_height="736dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/bg_img" />
+    android:id="@+id/bg_mstitel"
+    android:layout_width="414dp"
+    android:layout_height="736dp"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toTopOf="parent"
+    app:srcCompat="@drawable/bg_img" />
 
     <ImageView
         android:id="@+id/bg_set_toning"
@@ -26,8 +26,10 @@
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/bg_rh" />
 
+
+
     <ImageView
-        android:id="@+id/bg_gradient"
+        android:id="@+id/bg_linear"
         android:layout_width="414dp"
         android:layout_height="736dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -160,5 +162,5 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btnSignGmail" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
 
+</androidx.constraintlayout.widget.ConstraintLayout>

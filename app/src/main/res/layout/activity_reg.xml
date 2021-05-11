@@ -142,19 +142,6 @@
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/sonemo" />
 
-    <ImageView
-        android:id="@+id/ivRegAvatar"
-        android:layout_width="150dp"
-        android:layout_height="150dp"
-        android:layout_marginTop="12dp"
-        android:scaleType="fitXY"
-        app:layout_constraintBottom_toTopOf="@+id/linearLayout"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imgLogoReg"
-        tools:srcCompat="@tools:sample/avatars" />
-
     <!-- Поле ввода пароля -->
 
     <Button
@@ -168,6 +155,19 @@
         app:layout_constraintHorizontal_bias="0.736"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/ivRegAvatar" />
+
+    <ImageView
+        android:id="@+id/ivRegAvatar"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_marginTop="20dp"
+        android:scaleType="fitXY"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.536"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imgLogoReg"
+        tools:srcCompat="@tools:sample/avatars" />
 
     <EditText
         android:id="@+id/edtUserNameReg"
@@ -271,6 +271,15 @@
         android:textSize="14dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.744"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imgbtnCreateAcc" />
+
+    <TextView
+        android:id="@+id/Tost"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imgbtnCreateAcc" />
 

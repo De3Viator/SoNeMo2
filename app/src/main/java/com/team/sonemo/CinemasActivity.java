@@ -9,6 +9,7 @@ import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.util.Log;
+
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ImageButton;
@@ -22,10 +23,21 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.squareup.picasso.Picasso;
-import com.team.sonemo.adapters.RelisListAdapter;
+//import com.team.sonemo.adapters.RelisListAdapter;
 
 import java.util.ArrayList;
 import java.util.Map;
+
+import static com.team.sonemo.FilmActivity.ITEM_TYPE;
+
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.team.sonemo.Adapter.RelisListAdapter;
+import com.team.sonemo.Model.RelisList;
+import com.team.sonemo.activity.home.ProfileActivity;
+
+
+import java.util.ArrayList;
 
 import static com.team.sonemo.FilmActivity.ITEM_TYPE;
 
@@ -45,8 +57,10 @@ public class CinemasActivity extends AppCompatActivity {
 
     FirebaseFirestore db = FirebaseFirestore.getInstance();
     private RelisListAdapter.OnItemTypeClickListener listener = item -> {
-     Intent intent= new Intent(this,FilmActivity.class).putExtra(ITEM_TYPE, item);
-     startActivity(intent);
+        Intent intent= new Intent(this,FilmActivity.class).putExtra(ITEM_TYPE, item);
+        startActivity(intent);
+        intent= new Intent(this,FilmActivity.class).putExtra(ITEM_TYPE, item);
+        startActivity(intent);
     };
 
 
@@ -76,12 +90,13 @@ public class CinemasActivity extends AppCompatActivity {
         });
 
         btnProfile.setOnClickListener(v -> {
-            Intent intent = new Intent(this, MainActivity.class);
+            Intent intent = new Intent(this, ProfileActivity.class);
             startActivity(intent);
         });
 
 
     }
+
    private void readData() {
 
         ArrayList<RelisList> tmp= new ArrayList<>();

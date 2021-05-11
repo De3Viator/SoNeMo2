@@ -4,8 +4,10 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -31,7 +33,8 @@ import java.util.HashMap;
 public class MainActivity extends AppCompatActivity {
     private static final int RC_SIGN_IN = 100;
     GoogleSignInClient mGoogleSignInClient;
-    private Button btnLogin,btnRegister;
+    private ImageButton btnLogin;
+    private TextView btnRegister;
     private TextView txtRecover;
     private EditText etEmail,etPassword;
     private FirebaseAuth mAuth;
@@ -39,16 +42,18 @@ public class MainActivity extends AppCompatActivity {
 
 
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        btnRegister = findViewById(R.id.btnLogRegister);
-        btnLogin = findViewById(R.id.btnLogin);
-        etEmail = findViewById(R.id.etLogEmail);
-        etPassword = findViewById(R.id.etLogPassword);
+        btnRegister = findViewById(R.id.txtCreateAcc);
+        btnLogin = findViewById(R.id.imgbtnSignIn);
+        etEmail = findViewById(R.id.etEmail);
+        etPassword = findViewById(R.id.etPassword);
         txtRecover = findViewById(R.id.txtRecover);
-        btnGoogleSign = findViewById(R.id.btnGoogleSign);
+        btnGoogleSign = findViewById(R.id.btnSignGmail);
 
         // Configure Google Sign In
         GoogleSignInOptions gso = new GoogleSignInOptions
@@ -64,17 +69,22 @@ public class MainActivity extends AppCompatActivity {
             String email = etEmail.getText().toString().trim();
             String password = etPassword.getText().toString().trim();
 
-            mAuth.signInWithEmailAndPassword(email,password).addOnCompleteListener(task -> {
-                if(task.isSuccessful()){
-                    Toast.makeText(MainActivity.this,"Log is succesfull",Toast.LENGTH_SHORT).show();
-                    startActivity(new Intent(MainActivity.this, ProfileActivity.class));
+            if (TextUtils.isEmpty(email) || TextUtils.isEmpty(password)){
+                Toast.makeText(MainActivity.this, "Please fill the Fields", Toast.LENGTH_SHORT).show();
+            }else {
 
-                } else {
-                    Toast.makeText(MainActivity.this,"Log is Failed",Toast.LENGTH_SHORT).show();
-                }
+                mAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(task -> {
+                    if (task.isSuccessful()) {
+                        Toast.makeText(MainActivity.this, "Log is succesfull", Toast.LENGTH_SHORT).show();
+                        startActivity(new Intent(MainActivity.this, ProfileActivity.class));
 
-            });
+                    } else {
+                        Toast.makeText(MainActivity.this, "Log is Failed", Toast.LENGTH_SHORT).show();
+                    }
 
+                });
+
+            }
             btnGoogleSign.setOnClickListener( v1 -> {
                 Intent signInIntent = mGoogleSignInClient.getSignInIntent();
                 startActivityForResult(signInIntent, RC_SIGN_IN);
