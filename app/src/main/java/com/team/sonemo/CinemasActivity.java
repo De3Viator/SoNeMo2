@@ -34,7 +34,6 @@ public class CinemasActivity extends AppCompatActivity {
     private ImageButton btnCinemas;
     private ImageButton btnMessages;
     private ImageButton btnProfile;
-    private Button btnReadMore;
     private SQLiteDatabase sqLiteDatabase;
     public static String TAG = "cinema_activity";
 
@@ -59,7 +58,6 @@ public class CinemasActivity extends AppCompatActivity {
         btnHome = findViewById(R.id.btnHome);
         btnMessages = findViewById(R.id.btnMessages);
         rvRelis = findViewById(R.id.rvRelis);
-        btnReadMore = findViewById(R.id.btnReadMore);
         rvRelis.setLayoutManager(new LinearLayoutManager(this));
         adapter = new RelisListAdapter(listener);
 
@@ -82,9 +80,7 @@ public class CinemasActivity extends AppCompatActivity {
             startActivity(intent);
         });
 
-        btnReadMore.setOnClickListener(v -> {
-            Intent intent = new Intent(this,FilmActivity.class);
-        });
+
     }
    private void readData() {
 

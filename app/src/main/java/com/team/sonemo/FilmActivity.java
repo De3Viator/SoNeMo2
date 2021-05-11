@@ -1,11 +1,17 @@
 package com.team.sonemo;
 
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.media.AudioAttributes;
+import android.media.AudioManager;
 import android.media.MediaRecorder;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
+import android.webkit.WebChromeClient;
+import android.webkit.WebView;
 import android.widget.ImageView;
 import android.widget.MediaController;
 import android.widget.TextView;
@@ -30,31 +36,34 @@ public class FilmActivity extends AppCompatActivity  {
     public TextView idFilmDescription;
     public ImageView poster;
     public static String ITEM_TYPE ="ITEM_TYPE";
-    public VideoView trailer;
+    public WebView trailer;
     public String trailerURL;
 
 
-    protected void onCreate(Bundle savedInstanceState, RelisList recipe) {
+    @RequiresApi(api = Build.VERSION_CODES.O)
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_film);
         RelisList item = (RelisList) getIntent().getSerializableExtra(ITEM_TYPE);
+
         idFilmName = findViewById(R.id.idFilmName);
         idDataRelis = findViewById(R.id.idDataRelis);
-        poster = findViewById(R.id.idPoster);
-        String videoSource = trailerURL;
+        poster = findViewById(R.id.posterId);
         trailer =  findViewById(R.id.trailerId);
+        idCast = findViewById(R.id.idCast);
+        idFilmDescription = findViewById(R.id.idFilmDescription);
+ //       trailer.getSettings().setJavaScriptEnabled(true);
+ //       trailer.loadUrl(item.getTrailerURL());
+ //       trailer.setWebChromeClient(new WebChromeClient());
 
-        trailer.setVideoURI(Uri.parse(trailerURL));
-        Picasso.get().load(recipe.getPosterId()).into(poster);
-        idFilmName.setText(recipe.getFilmName()) ;
-        idDataRelis.setText(recipe.getFilmData());
-        idCast.setText(recipe.getCast());
-        idFilmDescription.setText(recipe.getFilmData());
 
-        trailer.setMediaController(new MediaController(this));
-        trailer.requestFocus(0);
-        trailer.start();
-        trailer.setMediaController(new MediaController(this));
+        Picasso.get().load(item.getPosterId()).into(poster);
+        idFilmName.setText(item.getFilmName()) ;
+        idDataRelis.setText(item.getFilmData());
+        idCast.setText(item.getCast());
+        idFilmDescription.setText(item.getFilmData());
+
+
     }
 
     }
